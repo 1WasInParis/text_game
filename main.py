@@ -1,10 +1,11 @@
+import sys
 def main(story):
     print(story.worldbuilding)
     choice = input(story.question)
     try:
         selected_choice = None
         for choice_obj in story.choices:
-            if choice_obj.id == choice:
+            if choice_obj.id.lower() == choice.lower():
                 selected_choice = choice_obj
                 break
         
@@ -13,6 +14,8 @@ def main(story):
             # If there's a next section, continue the story
             if selected_choice.next_section:
                 main(selected_choice.next_section)
+            if selected_choice.end_game:
+                sys.exit(0)
         else:
             valid_choices = [choice_obj.id for choice_obj in story.choices]
             raise ValueError(f"Invalid choice: '{choice}'. Please enter one of: {', '.join(valid_choices)}")
@@ -22,10 +25,11 @@ def main(story):
 
 
 class Choice:
-    def __init__(self, id, description, next_section=None):
+    def __init__(self, id, description, next_section,end_game=None):
         self.id = id
         self.description = description
         self.next_section = next_section
+        self.end_game = end_game
 
 class Story_Section:
     def __init__(self, id, worldbuilding, question, choices):
@@ -55,6 +59,11 @@ story4 = Story_Section('Alley',
 'What do you do?' 'Alley, Ignore the alley and walk past, Go to the alley and talk to the people)(follow, ignore , introduce))',
 [])
 
+story5 = Story_Section('End',
+'You follow the hooded figure down the alley and introducee yourself. The figure then promptly kills you',
+'You died , would you like to play again? (yes, no)',
+[])
+
 # Create choices with None as next_section initially
 Choice1 = Choice('left', 'You encounter a dog', None)
 Choice2 = Choice('right', 'You see a market dead ahead with lots of people', None)
@@ -70,16 +79,21 @@ Choice9 = Choice('talk', 'You go to the market and talk to the people', None)
 
 Choice10 = Choice('follow', 'You follow the hooded figure down the alley and wait behind a corner', None)
 Choice11 = Choice('ignore', '(BORING) You ignore the alley and walk past', None)
-Choice12 = Choice('introduce', 'You follow the hooded figure down the alley and introducee yourself like an idiot', None)
+Choice12 = Choice('introduce', 'You follow the hooded figure down the alley and introducee yourself like an idiot, ', None)
+
+Choice13 = Choice('yes', 'You play again', story1, True)
+Choice14 = Choice('no', 'You exit the game', None)
 # Now update the story sections with their choices
 story1.choices = [Choice1, Choice2, Choice3]
 story2.choices = [Choice4, Choice5, Choice6]
 story3.choices = [Choice7, Choice8, Choice9]
 story4.choices = [Choice10, Choice11, Choice12]
+story5.choices = [Choice13, Choice14]
 # Finally, update the choices with their next_section references
 Choice1.next_section = story2  #DOG story
 Choice2.next_section = story3  #MARKET story
 Choice3.next_section = story4  #ALLEY story
+Choice12.next_section = story5 # END GAME
 
 
 
