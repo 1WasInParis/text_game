@@ -14,10 +14,12 @@ class Story_Section:
         self.choices = choices
 
 class Character():
-    def __init__(self,health,strength,defence):
+    def __init__(self,health,strength,defence,mana,speed):
         self.health = health
         self.strength = strength
         self.defence = defence
+        self.mana = mana
+        self.speed = speed
     def heal_plus(self,amount):
         self.health += amount
 
@@ -26,6 +28,12 @@ class Character():
 
     def defend_plus(self,amount):
         self.defence += amount
+
+    def mana_plus(self,amount):
+        self.mana += amount
+
+    def speed_plus(self,amount):
+        self.speed += amount
 
 
 # class Combat_Section():
