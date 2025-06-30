@@ -1,4 +1,6 @@
 import sys
+from classes import *
+
 def main(story):
     print(story.worldbuilding)
     choice = input(story.question)
@@ -24,19 +26,6 @@ def main(story):
         main(story)
 
 
-class Choice:
-    def __init__(self, id, description, next_section,end_game=None):
-        self.id = id
-        self.description = description
-        self.next_section = next_section
-        self.end_game = end_game
-
-class Story_Section:
-    def __init__(self, id, worldbuilding, question, choices):
-        self.id = id
-        self.worldbuilding = worldbuilding
-        self.question = question
-        self.choices = choices
 
 # Create story sections first
 story1 = Story_Section('Start',
@@ -60,7 +49,7 @@ story4 = Story_Section('Alley',
 [])
 
 story5 = Story_Section('End',
-'You follow the hooded figure down the alley and introducee yourself. The figure then promptly kills you',
+'You follow the hooded figure down the alley and introduce yourself. The figure then promptly kills you',
 'You died , would you like to play again? (yes, no)',
 [])
 
@@ -94,17 +83,6 @@ Choice1.next_section = story2  #DOG story
 Choice2.next_section = story3  #MARKET story
 Choice3.next_section = story4  #ALLEY story
 Choice12.next_section = story5 # END GAME
-
-
-
-
-
-
-
-
-
-
-
 
 
 
