@@ -42,7 +42,17 @@ story1 = Story_Section('Start',
 
 story2 = Story_Section('Dog',
 'You encounter the dog and notice it is very large and aggressive',
-'What do you do? (Ignore, Pet, Run)',
+'What do you do? (ignore, pet, run)',
+[])
+
+story3 = Story_Section('Market',
+'You see a market dead ahead with lots of people',
+'What do you do? (go to the market), ignore the market and walk past , go to the market and talk to the people (look, pass, talk))',
+[])
+
+story4 = Story_Section('Alley',
+'You go down and can barely make out the silhouette of a hooded figure , who seems to disappear down a side alley',
+'What do you do?' 'Alley, Ignore the alley and walk past, Go to the alley and talk to the people)(follow, ignore , introduce))',
 [])
 
 # Create choices with None as next_section initially
@@ -50,20 +60,26 @@ Choice1 = Choice('left', 'You encounter a dog', None)
 Choice2 = Choice('right', 'You see a market dead ahead with lots of people', None)
 Choice3 = Choice('straight', 'Nothing interesting happens, but you notice an alley peeking out from the right', None)
 
-Choice4 = Choice('Ignore', 'The dog barks at you and runs away', None)
-Choice5 = Choice('Pet', 'The dog wags its tail and wags its tail', None)
-Choice6 = Choice('Run', 'The dog chases you and you fall down', None)
+Choice4 = Choice('ignore', 'The dog barks at you and runs away', None)
+Choice5 = Choice('pet', 'The dog wags its tail and wags its tail', None)
+Choice6 = Choice('run', 'The dog chases you and you fall down', None)
 
-Choice7
+Choice7 = Choice('look', 'You go to the market look around for a while', None)
+Choice8 = Choice('pass', 'You ignore the market and walk past', None)
+Choice9 = Choice('talk', 'You go to the market and talk to the people', None)
 
+Choice10 = Choice('follow', 'You follow the hooded figure down the alley and wait behind a corner', None)
+Choice11 = Choice('ignore', '(BORING) You ignore the alley and walk past', None)
+Choice12 = Choice('introduce', 'You follow the hooded figure down the alley and introducee yourself like an idiot', None)
 # Now update the story sections with their choices
 story1.choices = [Choice1, Choice2, Choice3]
 story2.choices = [Choice4, Choice5, Choice6]
-
+story3.choices = [Choice7, Choice8, Choice9]
+story4.choices = [Choice10, Choice11, Choice12]
 # Finally, update the choices with their next_section references
-Choice1.next_section = story2
-Choice2.next_section = story2  # You can change this to story3 when you create it
-Choice3.next_section = story2  # You can change this to story4 when you create it
+Choice1.next_section = story2  #DOG story
+Choice2.next_section = story3  #MARKET story
+Choice3.next_section = story4  #ALLEY story
 
 
 
