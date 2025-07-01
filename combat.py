@@ -130,10 +130,7 @@ def combat_section(player,enemy):
     except ValueError as e:
         print(e)
         combat_section(player,enemy)
-    # Check if enemy died from player's attack
-    if enemy.health <= 0:
-        print("You have defeated the enemy!")
-        return  # Exit combat, don't let dead enemy attack
+  
     
     # Enemy's turn (only if enemy is still alive)
     print(f'The enemy has {enemy.health} health left')
@@ -146,9 +143,16 @@ def combat_section(player,enemy):
     print(f'Enemy health after effects: {enemy.health}')
     print(f'Enemy has {len(enemy.effects)} effects after processing: {[e.name for e in enemy.effects]}')
     print("--- End Enemy Effects ---\n")
+
+      # Check if enemy died from player's attack
+    if enemy.health <= 0:
+        print("You have defeated the enemy!")
+        return  # Exit combat, don't let dead enemy attack
     
     print(f'The enemy attacks you, dealing {enemy.strength/player.defence} damage')
     player.damage_plus(enemy.strength/player.defence)
+
+      
     
     # Check if player died from enemy's attack
     if player.health <= 0:
