@@ -14,15 +14,15 @@ class Story_Section:
         self.choices = choices
 
 class Character():
-    def __init__(self,health,strength,defence,mana,speed,spells=[],effects=[]):
+    def __init__(self,health,strength,defence,mana,speed,spells=None,effects=None,placeholder=0):
         self.health = health
         self.strength = strength
         self.defence = defence
         self.mana = mana
         self.speed = speed
-        self.spells = spells
-        self.effects = effects
-        
+        self.spells = spells if spells is not None else []
+        self.effects = effects if effects is not None else []
+        self.placeholder = placeholder
     def heal_plus(self,amount):
         self.health += amount
 
@@ -40,9 +40,11 @@ class Character():
 
     def process_effects(self):
         
+        
         effects_remove = []
         
         for effect in self.effects:
+            print(f"DEBUG: Processing effect {effect.name} on {self.__class__.__name__}")
             effect.apply_effect(self)
             
             effect.duration -= 1
@@ -126,7 +128,7 @@ class Effect():
         self.value = value  
         
     def apply_effect(self, character):
-        print(f"DEBUG: Applying {self.name} effect (type: {self.effect_type}, value: {self.value}) to {character.__class__.__name__}")
+       
         
         # Check if value is None or 0
         if self.value is None or self.value == 0:
