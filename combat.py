@@ -1,8 +1,7 @@
 from classes import *
 
 player1 = Character(100,10,1,100,12)
-enemy1 = Character(50,5,1,0,10)
-
+enemy_cultist = Character(50,5,1,0,10)
 
 
 
@@ -161,6 +160,7 @@ def player_turn(player,enemy):
                         print(f"Not enough mana! You need {abs(spell.mana_cost)} mana but have {player.mana}")
                 else:
                     print(f"Unknown spell: {magic_choice}")
+                    return
             except ValueError as e:
                 print(e)
                 player_turn(player,enemy)

@@ -1,5 +1,6 @@
 import sys
 from classes import *
+from combat import *
 
 def main(story):
     print(story.worldbuilding)
@@ -15,7 +16,11 @@ def main(story):
             print(selected_choice.description)
             # If there's a next section, continue the story
             if selected_choice.next_section:
-                main(selected_choice.next_section)
+                if selected_choice.next_section == "combat":
+                    # Start combat with the cultist
+                    combat_section(player1, enemy_cultist)
+                else:
+                    main(selected_choice.next_section)
             if selected_choice.end_game:
                 sys.exit(0)
         else:
@@ -68,8 +73,7 @@ Choice9 = Choice('talk', 'You go to the market and talk to the people', None)
 
 Choice10 = Choice('follow', 'You follow the hooded figure down the alley and wait behind a corner', None)
 Choice11 = Choice('ignore', '(BORING) You ignore the alley and walk past', None)
-Choice12 = Choice('introduce', 'You follow the hooded figure down the alley and introducee yourself like an idiot, ', None)
-
+Choice12 = Choice('introduce', 'You follow the hooded figure down the alley and introducee yourself like an idiot', None)
 Choice13 = Choice('yes', 'You play again', story1, True)
 Choice14 = Choice('no', 'You exit the game', None)
 # Now update the story sections with their choices
@@ -82,8 +86,7 @@ story5.choices = [Choice13, Choice14]
 Choice1.next_section = story2  #DOG story
 Choice2.next_section = story3  #MARKET story
 Choice3.next_section = story4  #ALLEY story
-Choice12.next_section = story5 # END GAME
-
+Choice12.next_section = "combat" 
 
 
 story = []
